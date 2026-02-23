@@ -145,6 +145,7 @@ header {
     overflow-y: auto;
 }
 
+/*ti kanei? den vlepw na allazei kati*/
 #prompt-input:focus {
     border-color: #3a7fb5;
     box-shadow: 0 0 0 2px rgba(58, 127, 181, 0.15);
@@ -163,7 +164,7 @@ header {
     letter-spacing: 1px;
 }
 
-/* Scrollbar μέσα στο textarea */
+/* Scrollbar μέσα στο text area όταν το prompt μεγαλώνει*/
 #prompt-input::-webkit-scrollbar {
     width: 6px;
 }
