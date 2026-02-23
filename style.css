@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #060d1a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ── HEADER ── */
+header {
+    background-color: #19060e; /*#0b1a2e;*/
+    border-bottom: 1px solid #5c1a2c; /*#1a3a5c;*/
+    padding: 14px 30px;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #d589a9; /*#7fb3d3;*/
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+/* ── CHAT AREA (scrollable) ── */
+#chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+#chat-area::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-area::-webkit-scrollbar-track {
+    background: #060d1a;
+}
+#chat-area::-webkit-scrollbar-thumb {
+    background: #1a3a5c;
+    border-radius: 3px;
+}
+
+/* ── MESSAGE ROWS ── */
+.message-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.message-row.prompt-row {
+    justify-content: flex-end;
+}
+
+.message-row.answer-row {
+    justify-content: flex-start;
+}
+
+/* ── BUBBLES ── */
+.bubble {
+    max-width: 65%;
+    min-width: 180px;
+    width: fit-content;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    animation: fadeSlideIn 0.3s ease forwards; /*Shows the bubble smoother*/
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    /*Οι 3 παραπάνω σειρές σπάνε το κείμενο όταν είναι πού μεγάλο ώστε να μην ξεφεύγει προς τα δεξιά*/
+    white-space: pre-wrap; /*Διατηρεί τα line breaks αλλά επιτρέπει στο κείμενο να τυλιχθεί (wrap) μέσα στο box*/
+}
+
+.bubble-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.6;
+}
+
+.prompt-bubble {
+    background-color: #0d2a40;
+    border: 1px solid #1a4a6b;
+    color: #b0cce0;
+}
+.prompt-bubble .bubble-label {
+    color: #7fb3d3;
+}
+
+.answer-bubble {
+    background-color: #0a2233;
+    border: 1px solid #163550;
+    color: #b0cce0;
+}
+.answer-bubble .bubble-label {
+    color: #4a8fb0;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── INPUT AREA (fixed at bottom) ── */
+#input-area {
+    flex-shrink: 0;
+    padding: 16px 20px 22px 20px;
+    background-color: #060d1a;
+    border-top: 1px solid #0f2030;
+    display: flex;
+    justify-content: center;
+}
+
+#input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+
+#prompt-input {
+    width: 100%;
+    min-height: 60px;
+    max-height: 140px;
+    resize: none;
+    background-color: #0d2236;
+    border: 1px solid #1a4060;
+    border-radius: 8px;
+    color: #7fb3d3;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 14px 18px;
+    outline: none;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+
+#prompt-input:focus {
+    border-color: #3a7fb5;
+    box-shadow: 0 0 0 2px rgba(58, 127, 181, 0.15);
+}
+
+#prompt-input::placeholder {
+    color: #4a7a9b;
+    font-style: italic;
+}
+
+#input-hint {
+    text-align: center;
+    font-size: 11px;
+    color: #2a5070;
+    margin-top: 6px;
+    letter-spacing: 1px;
+}
+
+/* Scrollbar μέσα στο textarea */
+#prompt-input::-webkit-scrollbar {
+    width: 6px;
+}
+#prompt-input::-webkit-scrollbar-track {
+    background: #0d2236;
+    /*#360d1a;*/
+}
+#prompt-input::-webkit-scrollbar-thumb {
+    background: #1a3a5c;
+    border-radius: 3px;
+}
+#prompt-input::-webkit-scrollbar-thumb:hover {
+    background: #3a7fb5;
+}
