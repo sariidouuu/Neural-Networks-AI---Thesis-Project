@@ -62,3 +62,7 @@ promptInput.addEventListener('input', function () {
     this.style.height = 'auto';
     this.style.height = Math.min(this.scrollHeight, 140) + 'px';
 });
+
+/* - BUTTON FOR SENDING THE PROMPT - */
+const sendBtn = document.getElementById('send-btn');
+sendBtn.addEventListener('click', handleSend);

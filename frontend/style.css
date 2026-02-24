@@ -124,12 +124,14 @@ header {
 
 #input-wrapper {
     display: flex;
-    flex-direction: column;
-    width: 55%;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 12px;
+    width: auto;
 }
 
 #prompt-input {
-    width: 100%;
+    width: 600px;
     min-height: 60px;
     max-height: 140px;
     resize: none;
@@ -178,4 +180,50 @@ header {
 }
 #prompt-input::-webkit-scrollbar-thumb:hover {
     background: #3a7fb5;
+}
+
+/* - BUTTON FOR SENDIND THE PROMPT -*/
+#input-hint {
+    text-align: center;
+    font-size: 11px;
+    color: #2a5070;
+    margin-top: 6px;
+    letter-spacing: 1px;
+    width: 100%;
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#input-area {
+    position: relative;
+    padding-bottom: 30px;
+}
+
+#send-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid #1a4060;
+    background-color: #0d2236;
+    color: #7fb3d3;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.25s, background-color 0.25s, box-shadow 0.25s;
+    margin-bottom: 8px;
+}
+
+#send-btn:hover {
+    border-color: #3a7fb5;
+    background-color: #112d45;
+    box-shadow: 0 0 0 3px rgba(58, 127, 181, 0.15);
+}
+
+#send-btn:active {
+    background-color: #1a3f5c;
 }
