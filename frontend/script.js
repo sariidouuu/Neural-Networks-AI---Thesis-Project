@@ -66,3 +66,50 @@ promptInput.addEventListener('input', function () {
 /* - BUTTON FOR SENDING THE PROMPT - */
 const sendBtn = document.getElementById('send-btn');
 sendBtn.addEventListener('click', handleSend);
+
+
+/* ── MODEL SELECTOR ──*/
+const modelBtn      = document.getElementById('model-btn');
+const modelDropdown = document.getElementById('model-dropdown');
+const modelOptions  = document.querySelectorAll('.model-option');
+
+// Φόρτωσε την αποθηκευμένη επιλογή (default: 1)
+let selectedModel = localStorage.getItem('selectedModel') || '1';
+updateModelSelection();
+
+modelBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    modelDropdown.classList.toggle('open');
+});
+
+// Κλείσε το dropdown αν κάνεις click αλλού
+document.addEventListener('click', function () {
+    modelDropdown.classList.remove('open');
+});
+
+modelOptions.forEach(function (option) {
+    option.addEventListener('click', function () {
+        selectedModel = this.getAttribute('data-model');
+        localStorage.setItem('selectedModel', selectedModel);
+        updateModelSelection();
+        modelDropdown.classList.remove('open');
+    });
+});
+
+function updateModelSelection() {
+    modelOptions.forEach(function (option) {
+        if (option.getAttribute('data-model') === selectedModel) {
+            option.classList.add('selected');
+        } else {
+            option.classList.remove('selected');
+        }
+    });
+}
+
+// ── Ενημέρωσε την getAIResponse να "ξέρει" ποιο μοντέλο είναι ενεργό ──
+function getAIResponse(userPrompt) {
+    // Όταν εκπαιδεύσεις τα μοντέλα, αντικατέστησε εδώ με τα API calls
+    // if (selectedModel === '1') { return model1.predict(userPrompt); }
+    // if (selectedModel === '2') { return model2.predict(userPrompt); }
+    return "I'm sorry, I'm not trained yet.";
+}
