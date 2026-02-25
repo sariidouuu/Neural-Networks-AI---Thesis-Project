@@ -1,14 +1,8 @@
 const chatArea    = document.getElementById('chat-area');
 const promptInput = document.getElementById('prompt-input');
 
-// ── AI Response ──
-// Replace this function with your trained model's API call in the future
-function getAIResponse(userPrompt) {
-    return "I'm sorry, I'm not trained yet.";
-}
-
-    // ── Add a message bubble to the chat ──
-    function addMessage(text, type) {
+/* ────── Add a message bubble to the chat ────── */
+function addMessage(text, type) {
     const row = document.createElement('div');
     row.classList.add('message-row', type === 'prompt' ? 'prompt-row' : 'answer-row');
 
@@ -31,7 +25,7 @@ function getAIResponse(userPrompt) {
     chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-// ── Send the prompt ──
+/* ── Send the prompt ────── */
 function handleSend() {
     const text = promptInput.value.trim();
     if (!text) return;
@@ -48,7 +42,7 @@ function handleSend() {
     }, 400);
 }
 
-// ── Keyboard events ──
+/* ────── Keyboard events ────── */
 // Enter = send | Shift+Enter = new line
 promptInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -63,12 +57,12 @@ promptInput.addEventListener('input', function () {
     this.style.height = Math.min(this.scrollHeight, 140) + 'px';
 });
 
-/* - BUTTON FOR SENDING THE PROMPT - */
+/* ────── BUTTON FOR SENDING THE PROMPT ────── */
 const sendBtn = document.getElementById('send-btn');
 sendBtn.addEventListener('click', handleSend);
 
 
-/* ── MODEL SELECTOR ──*/
+/* ────── MODEL SELECTOR ────── */
 const modelBtn      = document.getElementById('model-btn');
 const modelDropdown = document.getElementById('model-dropdown');
 const modelOptions  = document.querySelectorAll('.model-option');
@@ -106,7 +100,8 @@ function updateModelSelection() {
     });
 }
 
-// ── Ενημέρωσε την getAIResponse να "ξέρει" ποιο μοντέλο είναι ενεργό ──
+/* ────── AI RESPONSE BASED ON SELECTED MODEL ────── */
+// Replace this function with your trained model's API call in the future
 function getAIResponse(userPrompt) {
     // Όταν εκπαιδεύσεις τα μοντέλα, αντικατέστησε εδώ με τα API calls
     // if (selectedModel === '1') { return model1.predict(userPrompt); }
