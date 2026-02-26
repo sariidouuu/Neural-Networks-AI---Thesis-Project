@@ -1,33 +1,10 @@
 const chatArea    = document.getElementById('chat-area');
 const promptInput = document.getElementById('prompt-input');
 
-/* ────── Add a message bubble to the chat ────── */
-function addMessage(text, type) {
-    const row = document.createElement('div');
-    row.classList.add('message-row', type === 'prompt' ? 'prompt-row' : 'answer-row');
-
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble', type === 'prompt' ? 'prompt-bubble' : 'answer-bubble');
-
-    const label = document.createElement('div');
-    label.classList.add('bubble-label');
-    label.textContent = type === 'prompt' ? 'You' : 'AI';
-
-    const content = document.createElement('div');
-    content.textContent = text;
-
-    bubble.appendChild(label);
-    bubble.appendChild(content);
-    row.appendChild(bubble);
-    chatArea.appendChild(row);
-
-    // Scroll to the latest message
-    chatArea.scrollTop = chatArea.scrollHeight;
-}
-
-/* ── Send the prompt ────── */
+/* ────── SEND THE PROMPT ────── */
 function handleSend() {
     const text = promptInput.value.trim();
+    //trim: removes whitespace from both ends of a string. So if the user types only spaces, it will be considered empty and won't be sent as a prompt.
     if (!text) return;
 
     addMessage(text, 'prompt');
@@ -35,27 +12,72 @@ function handleSend() {
     promptInput.value = '';
     promptInput.style.height = 'auto';
 
-  // Small delay to simulate AI "thinking"
+    // Small delay to simulate AI "thinking"
     setTimeout(() => {
-    const response = getAIResponse(text);
-    addMessage(response, 'answer');
+        const response = getAIResponse(text);
+        addMessage(response, 'answer');
     }, 400);
 }
 
-/* ────── Keyboard events ────── */
+
+/* ────── ADD A MESSAGE BUBBLE TO THE CHAT ────── */
+function addMessage(text, type) {
+
+    //create a new div element "row"
+    const row = document.createElement('div');
+    row.classList.add('message-row', type === 'prompt' ? 'prompt-row' : 'answer-row');
+    /* if type == prompt then add a class prompt-row, else add a class answer-row */ 
+
+    //create a new div element "bubble"
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble', type === 'prompt' ? 'prompt-bubble' : 'answer-bubble');
+    /* if type == prompt then add a class prompt-bubble, else add a class answer-bubble */
+
+    //create a new div element "label" for the bubble 
+    const label = document.createElement('div');
+    label.classList.add('bubble-label');
+    label.textContent = type === 'prompt' ? 'You' : 'AI';
+
+    //create a new div element "content" for the text of the bubble
+    const content = document.createElement('div');
+    content.textContent = text;
+
+    //the text content is the entire bbble, and we create a label for the bubble to show who is speaking (You or AI)
+    //and a content area for the text of the bubble.
+
+    //We append the label and content to the bubble, then append the bubble to the row, and finally append the row to the chat area
+    bubble.appendChild(label);
+    bubble.appendChild(content);
+    row.appendChild(bubble);
+    chatArea.appendChild(row);
+
+    //The way we append the messages ensures that they are added in the correct order, and the chat area will grow as new messages are added.
+    //We use appendChild because it adds in order the elements
+
+    // Scroll to the latest message
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+
+/* ────── KEYBOARD EVENTS ────── */
 // Enter = send | Shift+Enter = new line
 promptInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    handleSend();
+        //with shift pressed we add a new line, without shift we send the prompt
+        e.preventDefault();
+        handleSend();
     }
 });
 
-// ── Auto-grow textarea as user types ──
+// Auto-grow textarea as user types
 promptInput.addEventListener('input', function () {
+    //1. The event 'input' activates everytime the user types, deletes, or pastes text into the textarea
     this.style.height = 'auto';
+    //2. We set the height to 'auto' to reset it, so that if the user deletes text, the textarea can shrink back down in real time
     this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+    //3. We then set the height to the scrollHeight (the total height of the content), but we cap it at 140px to prevent it from growing too large and taking up too much space in the UI.
 });
+
 
 /* ────── BUTTON FOR SENDING THE PROMPT ────── */
 const sendBtn = document.getElementById('send-btn');
@@ -65,45 +87,56 @@ sendBtn.addEventListener('click', handleSend);
 /* ────── MODEL SELECTOR ────── */
 const modelBtn      = document.getElementById('model-btn');
 const modelDropdown = document.getElementById('model-dropdown');
-const modelOptions  = document.querySelectorAll('.model-option');
+const modelOptions  = document.querySelectorAll('.model-option'); //the dot in .model-option indicates class
 
-// Φόρτωσε την αποθηκευμένη επιλογή (default: 1)
-let selectedModel = localStorage.getItem('selectedModel') || '1';
+// Load the saved selection from local storage (basically the selection we already made or the default: 1 -> || 1)
+let selectedModel = localStorage.getItem('selectedModel') || '1'; 
 updateModelSelection();
 
 modelBtn.addEventListener('click', function (e) {
     e.stopPropagation();
+    //The click toogle the dropdown menu, but if we click outside the dropdown, we want to close it. 
+    //So we stop the click event from propagating (διάδοση) to the document when we click on the model button.
     modelDropdown.classList.toggle('open');
 });
 
-// Κλείσε το dropdown αν κάνεις click αλλού
+// Close the dropdown if we click elsewhere on the document
 document.addEventListener('click', function () {
     modelDropdown.classList.remove('open');
+    //If the 'open' class does not exists: Add it to the dropdown model menu
+    //If it already exists: Remove it, so the menu closes
 });
 
 modelOptions.forEach(function (option) {
     option.addEventListener('click', function () {
-        selectedModel = this.getAttribute('data-model');
+        selectedModel = this.getAttribute('data-model'); // data-model is the attribute we set in the HTML for each option
         localStorage.setItem('selectedModel', selectedModel);
         updateModelSelection();
+        //When we choose the model, we save it to the local storage, and then we close the menuby removing 'open'
         modelDropdown.classList.remove('open');
     });
 });
 
+//This function updates the visual selection of the model options in the dropdown menu
 function updateModelSelection() {
+    //Because we use forEach, we loop through all the model options
     modelOptions.forEach(function (option) {
+        //We check if the data-model attribute of the option matches the selectedModel variable
         if (option.getAttribute('data-model') === selectedModel) {
             option.classList.add('selected');
+            //If it does we add the 'selected' class to that option, otherwise we remove it
         } else {
             option.classList.remove('selected');
         }
     });
 }
 
+
 /* ────── AI RESPONSE BASED ON SELECTED MODEL ────── */
+
 // Replace this function with your trained model's API call in the future
 function getAIResponse(userPrompt) {
-    // Όταν εκπαιδεύσεις τα μοντέλα, αντικατέστησε εδώ με τα API calls
+    // When we train the models, replace this with API calls to get the response from the selected model
     // if (selectedModel === '1') { return model1.predict(userPrompt); }
     // if (selectedModel === '2') { return model2.predict(userPrompt); }
     return "I'm sorry, I'm not trained yet.";
