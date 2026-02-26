@@ -15,6 +15,8 @@
                 <p class="dropdown-title">Choose the Model you want to use</p>
                 <div class="model-option selected" data-model="1">Επιλογή 1</div>
                 <div class="model-option" data-model="2">Επιλογή 2</div>
+                <!--The class model option is the same on both option (1 & 2) 
+                We use selected on option 1 to indicate that it is the default selected model when the page loads -->
             </div>
         </div> 
         Neural Networks AI — Thesis Project
@@ -24,12 +26,14 @@
 
     <div id="input-area">
         <div id="input-wrapper">
-            <textarea
-                id="prompt-input"
-                placeholder="Ask me anything about Neural Networks!"
-                rows="2" ..2 rows for the prompt..
-                ></textarea>
-            <button id="send-btn" title="Send" ..Το &#9658; είναι ένα βελάκι.. >&#9658;</button>  
+            <div class="input-row">
+                <textarea
+                    id="prompt-input"
+                    placeholder="Ask me anything about Neural Networks!"
+                    rows="2" ..2 rows for the prompt..
+                    ></textarea>
+                <button id="send-btn" title="Send" ..Το &#9658; είναι ένα βελάκι.. >&#9658;</button>  
+            </div>
             <div id="input-hint">Press Enter to send &nbsp;|&nbsp; Shift+Enter for new line</div>
         </div>
     </div>

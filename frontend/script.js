@@ -139,5 +139,5 @@ function getAIResponse(userPrompt) {
     // When we train the models, replace this with API calls to get the response from the selected model
     // if (selectedModel === '1') { return model1.predict(userPrompt); }
     // if (selectedModel === '2') { return model2.predict(userPrompt); }
-    return "I'm sorry, I'm not trained yet.";
+    return "I'm sorry, can't process your request. I'm not trained yet.";
 }

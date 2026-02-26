@@ -1,7 +1,10 @@
 * {
     margin: 0;
     padding: 0;
+    /* With margin & padding 0 we make sure that the site is the same on all browswers */
     box-sizing: border-box;
+    /* Without it, if we give 10px padding on a box 100px, the box will end up being 120px (right & left padding 10px
+    With border-box, the padding is included in the total */
 }
 
 body {
@@ -10,52 +13,52 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* We forbid scrolling on the main body */
+    /* We'll need scrolling only in the chat area*/
 }
 
 /* ────── HEADER ────── */
 header {
-    background-color: #19060e; /*#0b1a2e;*/
-    border-bottom: 1px solid #5c1a2c; /*#1a3a5c;*/
-    padding: 14px 30px;
+    position: relative;
+    background-color: #19060e;
+    border-bottom: 1px solid #5c1a2c;
+    padding: 15px 30px; /* 14px top/bottom, and 30px on left/right */
     text-align: center;
-    letter-spacing: 3px;
+    letter-spacing: 3px; 
     font-size: 13px;
-    font-weight: 600;
-    color: #d589a9; /*#7fb3d3;*/
+    font-weight: 600; /*the boldness of letters, 600 is semi-bold */
+    color: #d589a9; 
     text-transform: uppercase;
-    flex-shrink: 0;
-    z-index: 999; /*αυτό 999 και το drop down list 1000 ώστε να είναι πάνω από το chat area*/
+    flex-shrink: 0; /*We forbid shrinking of the header so it stays at the top of the screen even when the window is resized */
+    z-index: 999; /*On header we use 999 while on dropdown we use 1000 so the list will be above the chat area when we want to choose the model */
 }
 
 /* ────── MODEL SELECTOR ────── */
 #model-selector {
     position: absolute;
     left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 50%; /* Place the top edge of the selector exactly in the middle of the header height*/
+    transform: translateY(-50%); /* Move up half ur height */
+    /*Those 2 together place the button exactly in the middle of the header*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-header {
-    position: relative;
-}
-
 #model-btn {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
+    border-radius: 50%; /* Makes button circular */
     border: 1px solid #5c1a2c;
     background-color: #19060e;
-    color: #d589a9;
-    font-size: 14px;
-    cursor: pointer;
+    color: #d589a9; /* Color of the arrow */
+    font-size: 15px;
+    cursor: pointer; /* Cursor changes to pointer on hover */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Centers the arrow vertically */
+    justify-content: center; /* Centers the arrow horizontally */
     transition: border-color 0.25s, background-color 0.25s, box-shadow 0.25s;
+    /* The transition here prepares the ground for #model-btn:hover */
 }
 
 #model-btn:hover {
@@ -64,32 +67,38 @@ header {
     box-shadow: 0 0 0 3px rgba(213, 137, 169, 0.15);
 }
 
+/* Pseudo-selector */
+/* When the button is active (clicked), we change the background color to give feedback to the user that the click was registered */
 #model-btn:active {
     background-color: #3a1525;
 }
 
 #model-dropdown {
-    display: none;
+    display: none; /* Erases the element completely */
     flex-direction: column;
     margin-top: 8px;
     background-color: #19060e;
     border: 1px solid #5c1a2c;
     border-radius: 8px;
-    overflow: hidden;
-    min-width: 180px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    overflow: hidden;  /* We forbid scrolling */
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     z-index: 1000;
     position: absolute;
     top: 44px;
     left: 0;
 }
 
+/* By default, the dropdown is hidden with display: none. 
+When we click the model button, we toggle the 'open' class on the dropdown, which changes its display to flex, making it visible. 
+If we click outside the dropdown, we remove the 'open' class, hiding it again. This way we can show and hide the dropdown menu when needed. */
 #model-dropdown.open {
     display: flex;
 }
 
 .model-option {
-    padding: 10px 16px;
+    /* If i want hte text to be on the left: text-align: left;*/
+    padding: 10px 15px;
     font-size: 13px;
     color: #d589a9;
     cursor: pointer;
@@ -101,14 +110,16 @@ header {
     background-color: #2a0d1a;
 }
 
+/* That's the bold line on the left from/of the chosen model */
 .model-option.selected {
     background-color: #2a0d1a;
     font-weight: 700;
     border-left: 3px solid #d589a9;
 }
 
+/* That's the "Choose the Model you want to use" */
 .dropdown-title {
-    padding: 10px 16px;
+    padding: 10px 15px;
     font-size: 11px;
     color: #d589a9;
     letter-spacing: 2px;
@@ -121,21 +132,23 @@ header {
 
 /* ────── CHAT AREA (scrollable) ────── */
 #chat-area {
-    flex: 1;
-    overflow-y: auto;
-    padding: 30px 20px 20px 20px;
+    flex: 1; /* Makes the chat area take all the available space between header and input area */
+    overflow-y: auto; /* Activates the scrolling when messages overflow the container */
+    padding: 30px 20px 20px 20px; /* top right bottom left*/
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 0; /* 0 gap between messages*/
 }
 
+/* The 3 # below are used to create a custom scrollbar */
+/* the prefix webkit indicates that this is a browser-specific CSS property for WebKit-based browsers (Chrome, Safari, etc.) */
 #chat-area::-webkit-scrollbar {
     width: 6px;
 }
-#chat-area::-webkit-scrollbar-track {
+#chat-area::-webkit-scrollbar-track { /* thrack = path where the scrollbar moves*/
     background: #060d1a;
 }
-#chat-area::-webkit-scrollbar-thumb {
+#chat-area::-webkit-scrollbar-thumb { /* the scrollbar imprint */
     background: #1a3a5c;
     border-radius: 3px;
 }
@@ -146,38 +159,54 @@ header {
     width: 100%;
     margin-bottom: 14px;
 }
-
+/* If the message is a prompt, it should be aligned to the right */
 .message-row.prompt-row {
     justify-content: flex-end;
 }
-
+/* If the message is an answer, it should be aligned to the left */
 .message-row.answer-row {
     justify-content: flex-start;
 }
+/* The fact that we use the class message-row, message-row.prompt-row and message-row.answer-row 
+creates a dynamic application of styles. 
+
+In html the id chat-area is an empty div.
+1. .message-row we apply general styles for all messages.
+2. .message-row.prompt-row we apply styles only for the prompt messages.
+3. .message-row.answer-row we apply styles only for the answer messages.
+
+The message-row and after that the prompt-..  is hierchical.
+
+We create those classes on script.js
+*/
 
 /* ────── BUBBLES ────── */
 .bubble {
     max-width: 65%;
     min-width: 180px;
-    width: fit-content;
+    width: fit-content; /* The width of the bubble will adjust to fit the content*/
     padding: 14px 18px;
     border-radius: 8px;
     font-size: 14px;
     line-height: 1.6;
-    animation: fadeSlideIn 0.3s ease forwards; /*Shows the bubble smoother*/
+    animation: fadeSlideIn 0.3s ease forwards; /* Creates the bubble smoother */
+
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
-    /*Οι 3 παραπάνω σειρές σπάνε το κείμενο όταν είναι πού μεγάλο ώστε να μην ξεφεύγει προς τα δεξιά*/
-    white-space: pre-wrap; /*Διατηρεί τα line breaks αλλά επιτρέπει στο κείμενο να τυλιχθεί (wrap) μέσα στο box*/
+    /* Those 3 lines above are used to break the text when it's too long, so it doesn't overflow outside the bubble */
+
+    white-space: pre-wrap; /* Preserves whitespace and line breaks in the text, allowing it to wrap (τυλιχθεί) within the bubble */
 }
 
+/* This is the AI & YOU */
 .bubble-label {
+    color: #7fb3d3;
     font-size: 10px;
     letter-spacing: 2px;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     opacity: 0.6;
 }
 
@@ -186,23 +215,21 @@ header {
     border: 1px solid #1a4a6b;
     color: #b0cce0;
 }
-.prompt-bubble .bubble-label {
-    color: #7fb3d3;
-}
 
 .answer-bubble {
     background-color: #0a2233;
     border: 1px solid #163550;
     color: #b0cce0;
 }
-.answer-bubble .bubble-label {
-    color: #4a8fb0;
-}
 
+/* That's the way CSS creates animations */
 @keyframes fadeSlideIn {
+    /* From opacity 0 we create a smooth fade-in effect. The bubble appears 10px lower from its final position */
     from { opacity: 0; transform: translateY(10px); }
+    /* The message opacity becomes 1. translateY(0) brings the bubble back to its original pocition */
     to   { opacity: 1; transform: translateY(0); }
 }
+
 
 /* ────── INPUT AREA (fixed at bottom) ────── */
 #input-area {
@@ -211,15 +238,36 @@ header {
     background-color: #060d1a;
     border-top: 1px solid #0f2030;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centers the input-wrapper in the middle */
 }
 
+/* Operates like a container that organize prompt-input & send-button (& input-hint) */
 #input-wrapper {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; /* Indicates that the children of this container are arranged horizontally */
+    /* = prompt-input & send-button, but also input-hint. Theres the confusion */
+    /* Solution: input-row */
+    flex-direction: column;
+    align-items: center; /* Centers hint with the input-row */
     align-items: flex-end;
     gap: 12px;
     width: auto;
+}
+
+/* We create another class input-row that includes prompt-input & send-button */
+.input-row {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-end;  /* Aligns the prompt-input and send-btn to the bottom of the input-wrapper */
+    gap: 12px;
+}
+
+#input-hint {
+    text-align: center;
+    font-size: 11px;
+    color: #2a5070;
+    margin-top: 6px;
+    letter-spacing: 1px;
 }
 
 #prompt-input {
@@ -248,14 +296,6 @@ header {
 #prompt-input::placeholder {
     color: #4a7a9b;
     font-style: italic;
-}
-
-#input-hint {
-    text-align: center;
-    font-size: 11px;
-    color: #2a5070;
-    margin-top: 6px;
-    letter-spacing: 1px;
 }
 
 /* Scrollbar μέσα στο text area όταν το prompt μεγαλώνει*/
@@ -319,3 +359,13 @@ header {
 #send-btn:active {
     background-color: #1a3f5c;
 }
+
+
+
+/* Για οθόνες μικρότερες από 768px (κινητά/tablets) */
+/*@media (max-width: 768px) {
+    #input-wrapper {
+        width: 90%; /* Πιάνει σχεδόν όλο το πλάτος της οθόνης */
+    /*}
+}*/
+
