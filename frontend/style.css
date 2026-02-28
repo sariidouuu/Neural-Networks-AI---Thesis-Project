@@ -374,10 +374,61 @@ We create those classes on script.js
 
 
 
-/* Για οθόνες μικρότερες από 768px (κινητά/tablets) */
-/*@media (max-width: 768px) {
-    #input-wrapper {
-        width: 90%; /* Πιάνει σχεδόν όλο το πλάτος της οθόνης */
-    /*}
-}*/
+/* ────────── MOBILE RESPONSIVE ────────── */
+@media (max-width: 600px) {
 
+header {
+    padding: 14px 60px 14px 60px;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+#model-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+}
+
+#model-selector {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#chat-area {
+    padding: 16px 10px 10px 10px;
+}
+
+.bubble {
+    max-width: 80%;
+    font-size: 13px;
+    padding: 10px 13px;
+}
+
+#input-area {
+    padding: 10px 10px 28px 10px;
+}
+
+#input-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
+#input-hint {
+    font-size: 10px;
+}
+
+#prompt-input {
+    width: 100%;
+    min-width: 0;
+    font-size: 13px;
+    padding: 10px 12px;
+}
+
+#send-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+}
