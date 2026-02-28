@@ -378,7 +378,7 @@ We create those classes on script.js
 @media (max-width: 600px) {
 
 header {
-    padding: 14px 60px 14px 60px;
+    padding: 15px 60px 15px 60px;
     font-size: 11px;
     letter-spacing: 1px;
 }
@@ -393,12 +393,8 @@ header {
     left: 10px;
 }
 
-#model-option{
-    font-size: 11px;
-}
-
 #chat-area {
-    padding: 16px 10px 10px 10px;
+    padding: 15px 10px 10px 10px;
 }
 
 .bubble {
@@ -409,12 +405,15 @@ header {
 
 #input-area {
     padding: 10px 10px 28px 10px;
-    min-height: 120px;/*new*/
+    min-height: 120px;
+    padding-bottom: 50px;
 }
 
 #input-wrapper {
     width: 100%;
     max-width: 100%;
+    gap: 8px;
+    align-items: center;
 }
 
 #input-hint {
@@ -423,9 +422,9 @@ header {
 
 #prompt-input {
     width: 100%;
-    min-height: 80px; /*new*/
+    min-height: 80px; 
     font-size: 13px;
-    padding: 10px 12px;
+    padding: 10px 10px;
 }
 
 #send-btn {
