@@ -391,8 +391,6 @@ header {
 
 #model-selector {
     left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 #model-option{
@@ -426,7 +424,6 @@ header {
 #prompt-input {
     width: 100%;
     min-height: 80px; /*new*/
-    min-width: 0;
     font-size: 13px;
     padding: 10px 12px;
 }
