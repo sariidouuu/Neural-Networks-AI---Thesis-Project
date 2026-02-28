@@ -404,9 +404,7 @@ header {
 }
 
 #input-area {
-    padding: 10px 10px 28px 10px;
-    min-height: 120px;
-    padding-bottom: 50px;
+    padding: 10px 10px 10px 10px;
 }
 
 #input-wrapper {
@@ -421,8 +419,9 @@ header {
 }
 
 #prompt-input {
-    width: 100%;
-    min-height: 80px; 
+    width: clamp(60px, 75vw, 300px);
+    /*MIN: 60px (never smaller) | NORLAM: 75% the width of the screen | MAX: 300px (never bigger)*/
+    height: 70px; 
     font-size: 13px;
     padding: 10px 10px;
 }
