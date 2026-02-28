@@ -12,7 +12,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh; /*d for dynamic viewport*/
     overflow: hidden; /* We forbid scrolling on the main body */
     /* We'll need scrolling only in the chat area*/
 }
@@ -404,7 +404,11 @@ header {
 }
 
 #input-area {
-    padding: 10px 10px 10px 10px;
+    padding: 8px 10px 8px 10px;
+
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
 }
 
 #input-wrapper {
