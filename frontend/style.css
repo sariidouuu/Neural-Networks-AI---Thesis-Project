@@ -239,6 +239,8 @@ We create those classes on script.js
     border-top: 1px solid #0f2030;
     display: flex;
     justify-content: center; /* Centers the input-wrapper in the middle */
+    position: relative;
+    padding-bottom: 30px;
 }
 
 /* Operates like a container that organize prompt-input & send-button (& input-hint) */
@@ -274,20 +276,20 @@ We create those classes on script.js
     width: 600px;
     min-height: 60px;
     max-height: 140px;
-    resize: none;
+    resize: none; /* Forbids user to resize the input box */
     background-color: #0d2236;
     border: 1px solid #1a4060;
     border-radius: 8px;
     color: #7fb3d3;
     font-size: 14px;
-    font-family: inherit;
+    font-family: inherit; /* Uses the same font as the body */
     padding: 14px 18px;
-    outline: none;
+    outline: none; /* Removes the blue/black/white focus outline when user clicks inside the box */
     line-height: 1.5;
-    overflow-y: auto;
+    overflow-y: auto; /* Activates vertical scrolling when the content exceeds the max-height */
 }
 
-/*ti kanei? den vlepw na allazei kati*/
+/* When the user clicks inside the input box, we change the border color and add a subtle box shadow to give visual feedback that the box is active and ready for input. */
 #prompt-input:focus {
     border-color: #3a7fb5;
     box-shadow: 0 0 0 2px rgba(58, 127, 181, 0.15);
@@ -298,15 +300,15 @@ We create those classes on script.js
     font-style: italic;
 }
 
-/* Scrollbar μέσα στο text area όταν το prompt μεγαλώνει*/
+/* Custom scrollbar */
 #prompt-input::-webkit-scrollbar {
     width: 6px;
 }
-#prompt-input::-webkit-scrollbar-track {
+#prompt-input::-webkit-scrollbar-track { /* thrack = path where the scrollbar moves*/
     background: #0d2236;
     /*#360d1a;*/
 }
-#prompt-input::-webkit-scrollbar-thumb {
+#prompt-input::-webkit-scrollbar-thumb { /* the scrollbar imprint */
     background: #1a3a5c;
     border-radius: 3px;
 }
@@ -314,23 +316,29 @@ We create those classes on script.js
     background: #3a7fb5;
 }
 
+
 /* ────── BUTTON FOR SENDIND THE PROMPT ────── */
 #input-hint {
-    text-align: center;
+    text-align: center; /* The triangle is centered */
     font-size: 11px;
     color: #2a5070;
     margin-top: 6px;
     letter-spacing: 1px;
     width: 100%;
     position: absolute;
+
+    /* 1. position:fixed, hint locks based on the window of the browser. (viewport) */
+    /* 2. position:absolute, hint is placed based on the nearest "parent" that has its own position (here #input-area). */
+    /* Cause input-area is relative, bottom:4px clacs the end of the input-area and not the end of the viewport */
+    /* 3. position:relative, the hint would stay in its natural order and just be shifted a little from its own position.
+        It wouldn't "fly" to the bottom. */
+    /* 4. In our case, cause #input-area covers the bottom of the screen and we do not have scrolling, 
+        whether we set it to fixed or absolute, the result will be the same. */
+    /* We prefer absolute because it makes more sense to define the position of the hint relative to the input box (parent). */
+
     bottom: 4px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-#input-area {
-    position: relative;
-    padding-bottom: 30px;
 }
 
 #send-btn {
