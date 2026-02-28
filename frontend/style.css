@@ -423,9 +423,9 @@ header {
 }
 
 #prompt-input {
-    width: clamp(60px, 75vw, 300px);
+    width: clamp(60px, 75vw, 350px);
     /*MIN: 60px (never smaller) | NORLAM: 75% the width of the screen | MAX: 300px (never bigger)*/
-    height: 70px; 
+    height: 60px; 
     font-size: 13px;
     padding: 10px 10px;
 }
