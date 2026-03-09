@@ -4,9 +4,9 @@ Live: [Neural-Networks-AI](https://sariidouuu.github.io/Neural-Networks-AI/front
 A comprehensive Full-Stack Web Application featuring a custom Neural Network trained to provide intelligent responses regarding "Machine Learning" and "Neural Networks" course theory.
 
 ## 🚀 Overview
-This project is my undergraduate thesis (2026). Unlike applications that rely on external APIs (like OpenAI), this chatbot is built from scratch. It features a custom-trained model based on a specialized JSON dataset using the PyTorch framework.
+This project is an undergraduate thesis (2026) focused on a comparative analysis between two distinct Artificial Intelligence architectures. The application features a dual-model system, allowing users to interact with both a large-scale pre-trained model and a specialized, custom-built AI.
 
-The application allows users to query Machine Learning and Neural Networks concepts through a modern web interface and receive real-time, accurate explanations.
+The primary goal is to evaluate the performance, accuracy, and efficiency of these two approaches when answering complex queries regarding Machine Learning and Neural Networks theory
 
 ## 🛠 Tech Stack
 
