@@ -146,7 +146,8 @@ async function getAIResponse(userPrompt) {
     if (selectedModel === '2') { 
         try {
             // We POST request on our local server (app.py)
-            const response = await fetch('http://127.0.0.1:5000/chat', {
+            //const response = await fetch('http://127.0.0.1:5000/chat', {
+            const response = await fetch('https://neural-networks-ai.onrender.com/chat',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // We inform our server that we send them the JSON file
